@@ -663,25 +663,6 @@ CREATE OR REPLACE VIEW "public"."uvwOverallAssessment" AS
 	AND "HFD"."ValidityTo" IS NULL
 ;
 
-CREATE OR REPLACE VIEW "public"."uvwpremiumcollection" AS
-	SELECT SUM("PR"."Amount")"Amount","PR"."PayType","Pay"."PayerType","Pay"."PayerName","R"."RegionName" "Region","FD"."DistrictName","Prod"."ProductCode","Prod"."ProductName",
-	"O"."Code","O"."LastName","O"."OtherNames","DO"."DistrictName" "OfficerDistrict",MONTH("PR"."PayDate")MonthTime,DATENAME_Q("PR"."PayDate")QuarterTime,YEAR("PR"."PayDate")YearTime
-	FROM "tblPremium" "PR" LEFT OUTER JOIN "tblPayer" "Pay" ON "PR"."PayerID" = "Pay"."PayerID"
-	INNER JOIN "tblPolicy" "PL" ON "PR"."PolicyID" = "PL"."PolicyID"
-	INNER JOIN "tblProduct" "Prod" ON "PL"."ProdID" = "Prod"."ProdID"
-	INNER JOIN "tblOfficer" "O" ON "PL"."OfficerID" = "O"."OfficerID"
-	INNER JOIN "tblDistricts" "DO" ON "O"."LocationId" = "DO"."DistrictId"
-	INNER JOIN "tblFamilies" "F" ON "PL"."FamilyID" = "F"."FamilyID"
-	INNER JOIN "tblVillages" "V" ON "V"."VillageId" = "F"."LocationId"
-	INNER JOIN "tblWards" "W" ON "W"."WardId" = "V"."WardId"
-	INNER JOIN "tblDistricts" "FD" ON "FD"."DistrictId" = "W"."DistrictId"
-	INNER JOIN "tblRegions" "R" ON "R"."RegionId" = "FD"."Region"
-	WHERE "PR"."ValidityTo" IS NULL AND "Pay"."ValidityTo" IS NULL AND "PL"."ValidityTo" IS NULL AND "F"."ValidityTo" IS NULL
-	GROUP BY "PR"."PayType","Pay"."PayerType","Pay"."PayerName", "R"."RegionName","Prod"."ProductCode","Prod"."ProductName",
-	"O"."Code","O"."LastName","O"."OtherNames","DO"."DistrictName",MONTH("PR"."PayDate"),DATENAME_Q("PR"."PayDate"),YEAR("PR"."PayDate"),
-	"FD"."DistrictName"
-;
-
 CREATE OR REPLACE VIEW "public"."uvwPremiumCollection" AS
 	SELECT SUM("PR"."Amount")"Amount","PR"."PayType","Pay"."PayerType","Pay"."PayerName","R"."RegionName" "Region","FD"."DistrictName","Prod"."ProductCode","Prod"."ProductName",
 	"O"."Code","O"."LastName","O"."OtherNames","DO"."DistrictName" "OfficerDistrict",MONTH("PR"."PayDate")MonthTime,DATENAME_Q("PR"."PayDate")QuarterTime,YEAR("PR"."PayDate")YearTime

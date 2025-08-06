@@ -8838,7 +8838,6 @@ INSERT INTO "tblLanguages" ("LanguageCode", "LanguageName", "SortOrder") VALUES 
 -- tblGender
 INSERT INTO "tblGender" ("Code", "Gender", "AltLanguage", "SortOrder") VALUES (N'F', N'Female', NULL, 2);
 INSERT INTO "tblGender" ("Code", "Gender", "AltLanguage", "SortOrder") VALUES (N'M', N'Male', NULL, 1);
-INSERT INTO "tblGender" ("Code", "Gender", "AltLanguage", "SortOrder") VALUES (N'O', N'Other', NULL, 3);
 
 -- tblLegalForms
 INSERT INTO "tblLegalForms" ("LegalFormCode", "LegalForms", "SortOrder", "AltLanguage") VALUES (N'C', N'Charity', NULL, N'Charité');
